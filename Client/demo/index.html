@@ -1,0 +1,34 @@
+<! DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="css/style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+	<body>
+		<div class="container">
+			<div class="btn btn-info facebook-login">Log in with Facebook</div>
+		</div>
+		<script src="js/jqmobi.min.js"></script>
+		<script src="../pg-oauth.js"></script>
+		<script>
+			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+			  document.addEventListener("deviceready", onDeviceReady, false);
+			} else {
+			  $(document).ready(function() { onDeviceReady(); });
+			}
+			
+			function onDeviceReady() {
+				$('.facebook-login').oauthLogin({
+					service: 'facebook',
+					client_id: 'FACEBOOK_ID_HERE',
+					permissions: ["read_stream"],
+					callback: 'oauthLoginToken'
+				});		
+				$(document).bind('oauthLoginToken', function(event) {
+					console.log(event.data);
+					alert('Logged in!');
+				});
+			}
+		</script>
+	</body>
+</html>
